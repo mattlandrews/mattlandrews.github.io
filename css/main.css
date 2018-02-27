@@ -4,12 +4,10 @@
 
 header {
     color: #E1E1E1;
-    padding-top: 50px;
-    padding-bottom: 80px;
     background: url('../network.jpg');
     background-size: cover;
 }
 
-header > div {
-    background-color: rgba(30, 30, 30, 0.8);
+header div div {
+    background-color: rgba(30, 30, 30, 0.6);
 }
