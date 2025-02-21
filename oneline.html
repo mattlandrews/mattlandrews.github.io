@@ -17,13 +17,14 @@
                 -ms-user-select: none;
                 user-select: none;
             }
-            /*div {
-                pointer-events: none;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                    -ms-user-select: none;
-                        user-select: none;
-            }*/
+            .author {
+                display: block;
+                margin-top: -30px;
+                margin-left: 80px;
+                margin-bottom: 50px;
+                font-family: 'Courier New', Courier, monospace;
+                color: lightgray;
+            }
             div.container {
                 display: flex;
                 justify-content: flex-start;
@@ -79,17 +80,15 @@
                 stroke-width: 5px;
                 stroke: #999999;
             }
-            .hottable1.hot {
+            .hottable.hot,
+            .hottable_top.hot,
+            .hottable_right.hot,
+            .hottable_bottom.hot,
+            .hottable_left.hot
+            {
                 stroke: #FF0000;
             }
-            .hottable2.hot {
-                stroke: #FF0000;
-            }
-            text.hottable1.hot {
-                stroke: none;
-                fill: #FF0000;
-            }
-            text.hottable2.hot {
+            text.hottable.hot {
                 stroke: none;
                 fill: #FF0000;
             }
@@ -97,13 +96,20 @@
                 font-size: 10px;
                 dominant-baseline: central;
             }
-            text.label.center {
+            text.source {
+                font-size: 10px;
+                font-weight: bolder;
+            }
+            text.source.on {
+                fill: #FF0000;
+            }
+            text.center {
                 text-anchor: middle;
             }
-            text.label.left {
+            text.left {
                 text-anchor: start;
             }
-            text.label.right {
+            text.right {
                 text-anchor: end;
             }
             rect.label {
@@ -137,6 +143,7 @@
     </head>
     <body>
         <h1>One-line Tool</h1>
+        <div class="author">by Matt Andrews</div>
         <div class="container">
             <div style="display: flex; flex-direction: row">
                 <div style="width: 700px">
@@ -179,23 +186,23 @@
             let symbols = [];
             let glyphs = [
                 "",
-                '<g transform="rotate(0,40,40)"><circle class="hottable1" cx="40" cy="30" r="20"/><circle class="hottable1" cx="40" cy="45" r="20"/><line class="hottable1" x1="40" y1="65" x2="40" y2="80"/></g><text class="label center" x="40" y="37.5"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(180,40,40)"><circle class="hottable1" cx="40" cy="30" r="20"/><circle class="hottable1" cx="40" cy="45" r="20"/><line class="hottable1" x1="40" y1="65" x2="40" y2="80"/></g><text class="label center" x="40" y="42.5"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g><circle class="hottable1" cx="40" cy="50" r="20"/><g transform="rotate(45, 40, 50)"><line class="hottable1" x1="40" y1="30" x2="60" y2="30"/><line class="hottable1" x1="20" y1="70" x2="40" y2="70"/></g><line class="hottable1" x1="40" y1="0" x2="40" y2="30"/></g><text class="label center" x="40" y="50"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g><circle class="hottable1" cx="40" cy="30" r="20"/><g transform="rotate(45, 40, 30)"><line class="hottable1" x1="40" y1="10" x2="60" y2="10"/><line class="hottable1" x1="20" y1="50" x2="40" y2="50"/></g><line class="hottable1" x1="40" y1="80" x2="40" y2="50"/></g><text class="label center" x="40" y="30"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(0,40,40)"><line class="hottable1" x1="40" y1="0" x2="40" y2="80"/></g><text class="label left" x="5" y="40"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(90,40,40)"><line class="hottable1" x1="40" y1="0" x2="40" y2="80"/></g><text class="label center" x="40" y="25"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(0,40,40)"><path class="hottable1" d="M 0,40 L 40,40 L 40,0"/></g><text class="label center" x="40" y="55"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(90,40,40)"><path class="hottable1" d="M 0,40 L 40,40 L 40,0"/></g><text class="label center" x="40" y="55"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(180,40,40)"><path class="hottable1" d="M 0,40 L 40,40 L 40,0"/></g><text class="label center" x="40" y="25"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(270,40,40)"><path class="hottable1" d="M 0,40 L 40,40 L 40,0"/></g><text class="label center" x="40" y="25"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(0,40,40)"><path class="hottable1" d="M 0,40 L 40,40 M 40,0 L 40,80"/></g><text class="label right" x="75" y="40"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(90,40,40)"><path class="hottable1" d="M 0,40 L 40,40 M 40,0 L 40,80"/></g><text class="label center" x="40" y="55"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(180,40,40)"><path class="hottable1" d="M 0,40 L 40,40 M 40,0 L 40,80"/></g><text class="label left" x="5" y="40"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(270,40,40)"><path class="hottable1" d="M 0,40 L 40,40 M 40,0 L 40,80"/></g><text class="label center" x="40" y="25"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(0,40,40)"><path class="hottable1" d="M 0,40 L 80,40 M 40,0 L 40,80"/></g><text class="label left" x="45" y="30"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="76"/>',
-                '<g transform="rotate(0,40,40)"><path class="hottable1" d="M 40,0 L 40,20"/><path class="openable open" d="M 40,20 A 20,20 0 0 0 40,60"/><path class="hottable2" d="M 40,60 L 40,80"/></g><text class="label left" x="30" y="40"></text><rect class="clickable hottable1" x="2" y="2" width="76" height="16"/><rect class="clickable openable" x="2" y="20" width="76" height="40"/><rect class="clickable hottable2" x="2" y="62" width="76" height="16"/>',
-                '<g transform="rotate(90,40,40)"><path class="hottable1" d="M 40,0 L 40,20"/><path class="openable open" d="M 40,20 A 20,20 0 0 0 40,60"/><path class="hottable2" d="M 40,60 L 40,80"/></g><text class="label center" x="40" y="50"></text><rect class="clickable hottable2" x="2" y="2" width="16" height="76"/><rect class="clickable openable" x="20" y="2" width="40" height="76"/><rect class="clickable hottable1" x="62" y="2" width="16" height="76"/>',
+                '<g transform="rotate(0,40,40)"><circle class="hottable" cx="40" cy="30" r="20"/><circle class="hottable" cx="40" cy="45" r="20"/><line class="hottable" x1="40" y1="65" x2="40" y2="80"/></g><text class="label center" x="40" y="37.5"></text><text class="source right" x="75" y="75">OFF</text><rect class="source clickable hottable" x="2" y="2" width="76" height="76"/>',
+                '<g transform="rotate(180,40,40)"><circle class="hottable" cx="40" cy="30" r="20"/><circle class="hottable" cx="40" cy="45" r="20"/><line class="hottable" x1="40" y1="65" x2="40" y2="80"/></g><text class="label center" x="40" y="42.5"></text><text class="source right" x="75" y="75">OFF</text><rect class="source clickable hottable" x="2" y="2" width="76" height="76"/>',
+                '<g ><circle class="hottable" cx="40" cy="50" r="20"/><g transform="rotate(45, 40, 50)"><line class="hottable" x1="40" y1="30" x2="60" y2="30"/><line class="hottable" x1="20" y1="70" x2="40" y2="70"/></g><line class="hottable" x1="40" y1="0" x2="40" y2="30"/></g><text class="label center" x="40" y="50"></text><text class="source right" x="75" y="75">ON</text><rect class="source clickable hottable" x="2" y="2" width="76" height="76"/>',
+                '<g ><circle class="hottable" cx="40" cy="30" r="20"/><g transform="rotate(45, 40, 30)"><line class="hottable" x1="40" y1="10" x2="60" y2="10"/><line class="hottable" x1="20" y1="50" x2="40" y2="50"/></g><line class="hottable" x1="40" y1="80" x2="40" y2="50"/></g><text class="label center" x="40" y="30"></text><text class="source right" x="75" y="75">ON</text><rect class="source clickable hottable" x="2" y="2" width="76" height="76"/>',
+                '<g transform="rotate(0,40,40)"><line class="hottable" x1="40" y1="0" x2="40" y2="80"/></g><text class="label left" x="5" y="40"></text>',
+                '<g transform="rotate(90,40,40)"><line class="hottable" x1="40" y1="0" x2="40" y2="80"/></g><text class="label center" x="40" y="25"></text>',
+                '<g transform="rotate(0,40,40)"><path class="hottable" d="M 0,40 L 40,40 L 40,0"/></g><text class="label center" x="40" y="55"></text>',
+                '<g transform="rotate(90,40,40)"><path class="hottable" d="M 0,40 L 40,40 L 40,0"/></g><text class="label center" x="40" y="55"></text>',
+                '<g transform="rotate(180,40,40)"><path class="hottable" d="M 0,40 L 40,40 L 40,0"/></g><text class="label center" x="40" y="25"></text>',
+                '<g transform="rotate(270,40,40)"><path class="hottable" d="M 0,40 L 40,40 L 40,0"/></g><text class="label center" x="40" y="25"></text>',
+                '<g transform="rotate(0,40,40)"><path class="hottable" d="M 0,40 L 40,40 M 40,0 L 40,80"/></g><text class="label right" x="75" y="40"></text>',
+                '<g transform="rotate(90,40,40)"><path class="hottable" d="M 0,40 L 40,40 M 40,0 L 40,80"/></g><text class="label center" x="40" y="55"></text>',
+                '<g transform="rotate(180,40,40)"><path class="hottable" d="M 0,40 L 40,40 M 40,0 L 40,80"/></g><text class="label left" x="5" y="40"></text>',
+                '<g transform="rotate(270,40,40)"><path class="hottable" d="M 0,40 L 40,40 M 40,0 L 40,80"/></g><text class="label center" x="40" y="25"></text>',
+                '<g transform="rotate(0,40,40)"><path class="hottable" d="M 0,40 L 80,40 M 40,0 L 40,80"/></g><text class="label left" x="45" y="30"></text>',
+                '<g transform="rotate(0,40,40)"><path class="hottable_top" d="M 40,0 L 40,20"/><path class="openable open" d="M 40,20 A 20,20 0 0 0 40,60"/><path class="hottable_bottom" d="M 40,60 L 40,80"/></g><text class="label left" x="30" y="40"></text><rect class="clickable openable" x="2" y="20" width="76" height="40"/>',
+                '<g transform="rotate(90,40,40)"><path class="hottable_right" d="M 40,0 L 40,20"/><path class="openable open" d="M 40,20 A 20,20 0 0 0 40,60"/><path class="hottable_left" d="M 40,60 L 40,80"/></g><text class="label center" x="40" y="50"></text><rect class="clickable openable" x="20" y="2" width="40" height="76"/>',
             ];
 
             let width = 24;
@@ -213,8 +220,12 @@
 
                 constructor (svg) {
                     this.type = 0;
-                    this.hot1 = false;
-                    this.hot2 = false;
+                    this.on = false;
+                    this.hot = false;
+                    this.top = null;
+                    this.right = null;
+                    this.bottom = null;
+                    this.left = null;
                     this.closed = false;
                     this.mainElement = svg.append("g")
                         .classed("symbol", true);
@@ -234,20 +245,96 @@
 
                 render () {
                     this.glyphElement.html(glyphs[this.type]);
-                    this.glyphElement.selectAll(".clickable.hottable1").on("click", function (event) {
-                        this.hot1 = !this.hot1;
-                        this.glyphElement.selectAll(".hottable1:not(.clickable)").classed("hot", this.hot1);
-                    }.bind(this));
-                    this.glyphElement.selectAll(".clickable.hottable2").on("click", function (event) {
-                        this.hot2 = !this.hot2;
-                        this.glyphElement.selectAll(".hottable2:not(.clickable)").classed("hot", this.hot2);
+                    let tops = [2,3,5,7,8,11,12,13,15,16];
+                    let rights = [6,8,9,12,13,14,15,17];
+                    let bottoms = [1,4,5,9,10,11,13,14,15,16];
+                    let lefts = [6,7,10,11,12,14,15,17];
+                    this.top = tops.includes(this.type) ? false : null;
+                    this.right = rights.includes(this.type) ? false : null;
+                    this.bottom = bottoms.includes(this.type) ? false : null;
+                    this.left = lefts.includes(this.type) ? false : null;
+                    this.glyphElement.selectAll(".source.clickable.hottable").on("click", function (event) {
+                        this.on = !this.on;
+                        this.glyphElement.selectAll("text.source")
+                            .classed("on", this.on)
+                            .text((this.on) ? "ON" : "OFF");
+                        updateAll();
                     }.bind(this));
                     this.glyphElement.selectAll(".clickable.openable").on("click", function (event) {
                         this.closed = !this.closed;
                         this.glyphElement.selectAll(".openable:not(.clickable)").classed("open", !this.closed);
+                        updateAll();
                     }.bind(this));
                 }
 
+            }
+
+            function updateAll () {
+
+                // reset hot on all
+                symbols.forEach((d) => {
+                    d.hot = false;
+                    d.top = (d.top !== null) ? false : null;
+                    d.right = (d.right !== null) ? false : null;
+                    d.bottom = (d.bottom !== null) ? false : null;
+                    d.left = (d.left !== null) ? false : null;
+                });
+
+                // check for on
+                let changed;
+                do {
+                    changed = false;
+                    symbols.forEach((d,i) => {
+
+                        if (d.on) {
+                            if (!d.hot) { changed = true; }
+                            d.hot = true;
+                        }
+
+                        if ((d.y > 0) && (d.top !== null) && (symbols[((d.y-1) * width) + d.x].bottom === true)) {
+                            if (!d.top) { changed = true; }
+                            d.top = true;
+                            if (d.type !== 16) { d.hot = true; }
+                            else if (d.closed) { d.hot = true; }
+                        }
+                        if ((d.x < (width-1)) && (d.right !== null) && (symbols[((d.y) * width) + d.x+1].left === true)) {
+                            if (!d.right) { changed = true; }
+                            d.right = true;
+                            if (d.type !== 17) { d.hot = true; }
+                            else if (d.closed) { d.hot = true; }
+                        }
+                        if ((d.y < (height-1)) && (d.bottom !== null) && (symbols[((d.y+1) * width) + d.x].top === true)) {
+                            if (!d.bottom) { changed = true; }
+                            d.bottom = true;
+                            if (d.type !== 16) { d.hot = true; }
+                            else if (d.closed) { d.hot = true; }
+                        }
+                        if ((d.x > 0) && (d.left !== null) && (symbols[((d.y) * width) + d.x-1].right === true)) {
+                            if (!d.left) { changed = true; }
+                            d.left = true;
+                            if (d.type !== 17) { d.hot = true; }
+                            else if (d.closed) { d.hot = true; }
+                        }
+
+                        if (d.hot) {
+                            if (d.top !== null) { d.top = true; }
+                            if (d.right !== null) { d.right = true; }
+                            if (d.bottom !== null) { d.bottom = true; }
+                            if (d.left !== null) { d.left = true; }
+                        }
+                        
+                    });
+                }
+                while (changed);
+
+                // draw
+                symbols.forEach((d) => {
+                    d.glyphElement.selectAll(".hottable:not(.clickable)").classed("hot", d.hot);
+                    d.glyphElement.selectAll(".hottable_top:not(.clickable)").classed("hot", d.top);
+                    d.glyphElement.selectAll(".hottable_right:not(.clickable)").classed("hot", d.right);
+                    d.glyphElement.selectAll(".hottable_bottom:not(.clickable)").classed("hot", d.bottom);
+                    d.glyphElement.selectAll(".hottable_left:not(.clickable)").classed("hot", d.left);
+                });
             }
 
             symbols = [];
@@ -298,8 +385,8 @@
 
             function update(d,i) {
                 d.element.select(".glyph").html(glyphs[d.type]);
-                let e = d.element.selectAll(".hottable1:not(.clickable)");
-                d.element.selectAll(".clickable.hottable1").on("click", function (event) {
+                let e = d.element.selectAll(".hottable:not(.clickable)");
+                d.element.selectAll(".clickable.hottable").on("click", function (event) {
                     let hot = !this.classed("hot");
                     this.classed("hot", hot);
                 }.bind(e));
